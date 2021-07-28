@@ -1,6 +1,8 @@
 const background = document.querySelector("#main");
-const bugArray = document.querySelectorAll(".item_img");
-let carrotArray = document.querySelectorAll(".carrot_img");
+const bugNodeList = document.querySelectorAll(".item_img");
+const bugArray = Array.prototype.slice.call(bugNodeList);
+let carrotNodeList = document.querySelectorAll(".carrot_img");
+let carrotArray = Array.prototype.slice.call(carrotNodeList);
 const bgAudio = new Audio("sound/bg.mp3");
 const bugAudio = new Audio("sound/bug_pull.mp3");
 const carrotAudio = new Audio("sound/carrot_pull.mp3");
@@ -17,14 +19,16 @@ const replayBox = document.querySelector(".replay_box");
 let carrotNumber = document.querySelector(".carrot_number");
 const countdown = document.querySelector(".countdown");
 let countdownNum = countdown.innerText;
-let timer = setInterval(() => countdownFunction(), 1000);
-countdown.innerText = `${countdownNum}s`;
+let timer = setInterval(function () {
+  countdownFunction();
+}, 1000);
+countdown.innerText = countdownNum + "s";
 
 clearInterval(timer);
 
 function countdownFunction() {
   countdownNum--;
-  countdown.innerText = `${countdownNum}s`;
+  countdown.innerText = countdownNum + "s";
   if (countdownNum === 0) {
     console.log("0s");
     clearInterval(timer);
@@ -46,9 +50,11 @@ function newGame(event) {
     event.target.className === "fas fa-play play_stop_icon play_icon"
   ) {
     countdownNum = 10;
-    countdown.innerText = `${countdownNum}s`;
+    countdown.innerText = countdownNum + "s";
     clearInterval(timer);
-    timer = setInterval(() => countdownFunction(), 1000);
+    timer = setInterval(function () {
+      countdownFunction();
+    }, 1000);
     console.log("play button click success");
     bgAudio.pause();
     bgAudio.currentTime = 0;
@@ -60,9 +66,17 @@ function newGame(event) {
       const randomNumY = Math.random();
       const bugX = parseInt(randomNumX * 1280);
       const bugY = parseInt(randomNumY * 295);
-      bugCarrotArrayItem.style.transform = `translate(${bugX - 25}px, ${
-        bugY - 25
-      }px)`;
+      console.log(
+        parseInt(bugX - 25) + "px" + "," + parseInt(bugY - 25) + "px"
+      );
+      bugCarrotArrayItem.style.transform =
+        "translate(" +
+        parseInt(bugX - 25) +
+        "px" +
+        "," +
+        parseInt(bugY - 25) +
+        "px" +
+        ")";
       bugCarrotArrayItem.classList.remove("display_none");
       playStopButton.className = "play_icon_box stop_box";
       playButton.className = "fas fa-stop play_stop_icon stop_icon";
@@ -106,7 +120,9 @@ gameBoxBackground.addEventListener("click", function (event) {
     event.target.className !== "fas fa-undo game_button lost_button"
   ) {
     console.log("replay cancel");
-    timer = setInterval(() => countdownFunction(), 1000);
+    timer = setInterval(function () {
+      countdownFunction();
+    }, 1000);
     gameBoxBackground.classList.add("display_none");
     replayBox.classList.add("display_none");
     bgAudio.play();
