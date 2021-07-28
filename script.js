@@ -18,12 +18,13 @@ let carrotNumber = document.querySelector(".carrot_number");
 const countdown = document.querySelector(".countdown");
 let countdownNum = countdown.innerText;
 let timer = setInterval(() => countdownFunction(), 1000);
+countdown.innerText = `${countdownNum}s`;
 
 clearInterval(timer);
 
 function countdownFunction() {
   countdownNum--;
-  countdown.innerText = countdownNum;
+  countdown.innerText = `${countdownNum}s`;
   if (countdownNum === 0) {
     console.log("0s");
     clearInterval(timer);
@@ -45,7 +46,7 @@ function newGame(event) {
     event.target.className === "fas fa-play play_stop_icon play_icon"
   ) {
     countdownNum = 10;
-    countdown.innerText = 10;
+    countdown.innerText = `${countdownNum}s`;
     clearInterval(timer);
     timer = setInterval(() => countdownFunction(), 1000);
     console.log("play button click success");
