@@ -16,9 +16,10 @@
     <main id="main">
       <div class="big_box">
         <img class="background_img" src="img/background.png" alt="배경그림" />
-        <div class="play_icon_box">
-          <i class="fas fa-play play_stop_icon"></i>
+        <div class="play_icon_box play_box">
+          <i class="fas fa-play play_stop_icon play_icon"></i>
         </div>
+        <span class="carrot_number">10</span>
         <footer class="bottom_half">
           <div class="real_play_ground">
             <img
@@ -124,6 +125,21 @@
             />
           </div>
         </footer>
+        <div class="game_box_background display_none">
+          <div class="won_box game_box display_none">
+            <i class="fas fa-undo game_button won_button"></i
+            ><span class="game_text">You Won</span>
+          </div>
+          <div class="lost_box game_box display_none">
+            <i class="fas fa-undo game_button lost_button"></i
+            ><span class="game_text">You Lost</span>
+          </div>
+          <div class="replay_box game_box display_none">
+            <i class="fas fa-undo game_button replay_button"></i
+            ><span class="game_text">Replay?</span>
+          </div>
+        </div>
+        <span class="countdown">10</span>
       </div>
     </main>
   </body>
